@@ -4,5 +4,5 @@
 (defn secread [x]
 (with-open [rdr (io/reader "./scraped")]
 (doseq [line (line-seq rdr)]
-(println (get (str/split line #" ") 0)))
-))
+(println (str/split (subs line 23) #" ") 0)))
+)
