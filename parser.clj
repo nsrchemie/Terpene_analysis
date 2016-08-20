@@ -4,5 +4,7 @@
 (defn secread [x]
 (with-open [rdr (io/reader "./scraped")]
 (doseq [line (line-seq rdr)]
-(println (get (str/split (clojure.string/replace line #"./hmdb_metabolites.xml:" "") #" ") 0), (get (str/split line #"family of ") 1)))
+(println (get (str/split (clojure.string/replace line 
+	#"./hmdb_metabolites.xml:" "") #" ") 0), 
+(get (str/split line #"family of ") 1)))
 ))
