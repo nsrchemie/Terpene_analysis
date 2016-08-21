@@ -2,26 +2,22 @@
 (require '[clojure.java.io :as io])
 
 
-(defn is-small? [val]
-	(if (<= (count val) 4)
-		true
-		false))
 
 (defn secread [x]
 (with-open [rdr (io/reader "./scraped")]
 (doseq [line (line-seq rdr)]
 
+(defn molecule [x] (get (str/split (clojure.string/replace line 
+	#"./hmdb_metabolites.xml:" "") #" ") x))
+
+(def mess(get (str/split line #"family of ") 1))
+
 (println 
-	(get (str/split (clojure.string/replace line 
-	#"./hmdb_metabolites.xml:" "") #" ") 0),
-	(clojure.string/replace (get (str/split (clojure.string/replace line 
-	 #"./hmdb_metabolites.xml:" "") #" ") 1) #"belongs" ""))
-
-; (if (is-small? (get (str/split (clojure.string/replace line 
-; 	 #"./hmdb_metabolites.xml:" "") #" ") 1)) 
-; println (get (str/split (clojure.string/replace line 
-; 	 #"./hmdb_metabolites.xml:" "") #" ") 1)))
+	(molecule 0),
+	(clojure.string/replace (molecule 1) #"belongs" ""),
+	(clojure.string/join "" (take 25 mess)))
 
 
-; (get (str/split line #"family of ") 1)
+
+; (println (seq mess))
 )))
