@@ -12,12 +12,12 @@
 
 (def mess(get (str/split line #"family of ") 1))
 
-(println 
-	(molecule 0),
+; (if (false? (.endsWith (molecule 0) "xml:"))
+	(println (clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" ""),
 	(clojure.string/replace (molecule 1) #"belongs" ""),
-	(get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0)
+	(get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0))
 
 
 
 ; (println (seq mess))
-))))
+)))
