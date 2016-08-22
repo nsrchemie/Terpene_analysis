@@ -11,11 +11,14 @@
 	#"./hmdb_metabolites.xml:" "") #" ") x))
 
 (def mess(get (str/split line #"family of ") 1))
-
-; (if (false? (.endsWith (molecule 0) "xml:"))
-	(println (clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" ""),
+(if (= (empty? (and (clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" "")
+(clojure.string/replace (molecule 1) #"belongs" "")
+(get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0) )  ) false)
+	
+	(prn 
+	(clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" ""),
 	(clojure.string/replace (molecule 1) #"belongs" ""),
-	(get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0))
+	(get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0) ))
 
 
 
