@@ -1,0 +1,7 @@
+(use `cascalog.api)
+(use `cascalog.playground)
+(?- (stdout)
+sentence)
+sentence
+(take 2 person)
+(type (take 2 person))

@@ -19,11 +19,11 @@
 (get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0) ))  
 	
 	(prn 
-		(clojure.string/join " "
+		{ (clojure.string/join " "
 	[(clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" ""),
-	(clojure.string/replace (molecule 1) #"belongs" ""),
-	 (get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0)
-	]))
+	(clojure.string/replace (molecule 1) #"belongs" "")]) 
+	 (get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0) }
+	)
 
 
 
