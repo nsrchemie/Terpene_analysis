@@ -13,16 +13,16 @@
 	#"./hmdb_metabolites.xml:" "") #" ") x))
 
 (def mess(get (str/split line #"family of ") 1))
-
+(defstruct cpd_sets :Compound :Class)
 (if-not (empty? (and(clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" "")
 (clojure.string/replace (molecule 1) #"belongs" "")
 (get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0) ))  
 	
 	(prn 
-		{ (clojure.string/join " "
+		(struct  cpd_sets (clojure.string/join " "
 	[(clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" ""),
 	(clojure.string/replace (molecule 1) #"belongs" "")]) 
-	 (get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0) }
+	 (get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0))
 	)
 
 
