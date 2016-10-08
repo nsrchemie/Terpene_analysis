@@ -6,33 +6,46 @@
 
 
 (defn secread [x]
-(with-open [rdr (io/reader "./resources/scraped")]
-(doseq [line (line-seq rdr)]
+	(with-open [rdr (io/reader "./resources/scraped")]
+		(doseq [line (line-seq rdr)]
 
-(defn molecule [x] (get (str/split (clojure.string/replace line 
-	#"./hmdb_metabolites.xml:" "") #" ") x))
+			(defn molecule [x] 
+				(get (str/split (clojure.string/replace line 
+				#"./hmdb_metabolites.xml:" "") #" ") x))
 
-(def mess(get (str/split line #"family of ") 1))
-(defstruct cpd_sets :Compound :Class)
-(if-not (empty? (and(clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" "")
-(clojure.string/replace (molecule 1) #"belongs" "")
-(get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0) ))  
-	
-	(prn 
-		(struct  cpd_sets (clojure.string/join " "
-	[(clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" ""),
-	(clojure.string/replace (molecule 1) #"belongs" "")]) 
-	 (get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0))
+			(def mess (get (str/split line #"family of ") 1))
+
+			(defstruct cpd_sets :Compound :Class)
+
+				(if-not (empty? (and(clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" "")
+				(clojure.string/replace (molecule 1) #"belongs" "")
+					(get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0) ))  
+					
+					(def ^:dynamic tin
+						(struct  cpd_sets 
+						(clojure.string/join " "
+						[(clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" ""),
+						(clojure.string/replace (molecule 1) #"belongs" "")]) 
+						 (get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0))
+					)
+				)
+			; (def not? (fn [y]
+			; 	(not= y {})))
+			; (prn (filter not? tin))
+			; (group-by :Class tin)
+			; (prn (frequencies tin)
+		; 		(defn by-a-key [data] 
+  ; (group-by #(get % "Diterpenes") data))
+		; 		(prn (by-a-key tin))
+		; (prn (reduce conj tin))
+		; (def newtin (into {} tin)
+		; 	(reduce conj tin))
+		(if (=(:Class tin) "Diterpenes") (
+			prn (:Compound tin)
+			))
+		 )
 	)
-
-
-
-; (println (seq mess))
+	; (prn (count tin))
 )
-; (def cpd_coll [cpds, (get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0)])
-; (prn cpds)
-; (prn (remove clojure.string/blank? cpds))
-)))
-
 (defn -main []
 	(secread "x"))
