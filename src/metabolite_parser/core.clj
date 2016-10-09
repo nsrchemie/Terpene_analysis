@@ -6,6 +6,7 @@
 
 
 (defn secread [x]
+	(def ditcount (atom #{}))
 	(with-open [rdr (io/reader "./resources/scraped")]
 		(doseq [line (line-seq rdr)]
 
@@ -19,16 +20,41 @@
 
 				(if-not (empty? (and(clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" "")
 				(clojure.string/replace (molecule 1) #"belongs" "")
-					(get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0) ))  
+					(get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0) 	
+						)		)  
 					
-					(def ^:dynamic tin
-						(struct  cpd_sets 
-						(clojure.string/join " "
-						[(clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" ""),
-						(clojure.string/replace (molecule 1) #"belongs" "")]) 
-						 (get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0))
-					)
+						(def ^:dynamic tin
+							(struct  cpd_sets 
+							(clojure.string/join " "
+							[(clojure.string/replace (molecule 0) #"./HMDB[0-9]*.xml:" ""),
+							(clojure.string/replace (molecule 1) #"belongs" "")]) 
+							 (get (str/split (clojure.string/join "" (take 25 mess)) #". Th")0))
+						)
 				)
+		(if-not (=(:Class tin) "Diterpenes") 
+
+		; prn (:Compound tin)
+		(swap! ditcount conj (:Compound tin))
+		; (prn @ditcount, (:Compound tin))
+		)
+
+		 )
+(prn @ditcount)
+	)
+
+
+)
+(defn -main []
+	(secread "x"))
+
+
+
+
+
+
+
+
+
 			; (def not? (fn [y]
 			; 	(not= y {})))
 			; (prn (filter not? tin))
@@ -40,12 +66,3 @@
 		; (prn (reduce conj tin))
 		; (def newtin (into {} tin)
 		; 	(reduce conj tin))
-		(if (=(:Class tin) "Diterpenes") (
-			prn (:Compound tin)
-			))
-		 )
-	)
-	; (prn (count tin))
-)
-(defn -main []
-	(secread "x"))
