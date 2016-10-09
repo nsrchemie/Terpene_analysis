@@ -32,37 +32,14 @@
 						)
 				)
 		(if-not (=(:Class tin) "Diterpenes") 
-
-		; prn (:Compound tin)
 		(swap! ditcount conj (:Compound tin))
-		; (prn @ditcount, (:Compound tin))
 		)
 
 		 )
-(prn @ditcount)
+		(prn @ditcount)
 	)
 
 
 )
 (defn -main []
 	(secread "x"))
-
-
-
-
-
-
-
-
-
-			; (def not? (fn [y]
-			; 	(not= y {})))
-			; (prn (filter not? tin))
-			; (group-by :Class tin)
-			; (prn (frequencies tin)
-		; 		(defn by-a-key [data] 
-  ; (group-by #(get % "Diterpenes") data))
-		; 		(prn (by-a-key tin))
-		; (prn (reduce conj tin))
-		; (def newtin (into {} tin)
-		; 	(reduce conj tin))
