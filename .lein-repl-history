@@ -5,3 +5,62 @@ sentence)
 sentence
 (take 2 person)
 (type (take 2 person))
+(def test {:Compound "Blah" :Class "Me"})
+(def thing {:Compound "Blah" :Class "Me"})
+thing
+(:Compound thing)
+(subs (:Compound thing) ["Bla" "blah" "Blah"])
+(subs (:Compound thing) ("Bla" "blah" "Blah"))
+(subs (:Compound thing) '("Bla" "blah" "Blah"))
+(subs (:Compound thing) '["Bla" "blah" "Blah"])
+(= (:Compound thing) ["Bla" "blah" "Blah"])
+(= (:Compound thing) "Blah")
+(= (:Compound thing) (or ("Blah" "blah")))
+(contains? (:Compound thing) ["blah" "Blah" "Bla:])
+)
+)))
+{{df
+sdf'sd;fm
+';
+???
+(def thing {:Compound "Blah" :Class "Me"})
+(contains? (:Compound thing) ["blah" "Blah" "Bla"])
+(contains? (:Compound thing) ("blah" "Blah" "Bla"))
+(contains? (:Compound thing) '("blah" "Blah" "Bla"))
+(def thing {:Compound "Blah" :Class "Me"})
+(:Compound thing)
+(use (quote incanter core charts excel))
+(use '(incanter core charts excel))
+(def tst me)
+(def tst)
+(type tst)
+(type `tst)
+(Symbol "me")
+(symbol "me")
+(def (symbol (str "mono" "count")))
+(str "mono" "count")
+(symbol (str "mono" "count"))
+(def terps ["Mono" "Di" "Tri" 
+"Sesqui"])
+terps
+(contains? terps 0)
+(get terps 0)
+(symbol (get terps 0) count)
+(symbol (get terps 0) `count)
+(symbol `(get terps 0) count)
+(symbol `(get terps 0)" count")
+(symbol (str `(get terps 0)" count"))
+(symbol (str (get terps 0) "count"))
+(def (symbol (str (get terps 0) "count")))
+(def `(symbol (str (get terps 0) "count")))
+(doseq [x terps]
+(intern *ns* (symbol x) 666))
+(doseq [x ["A" "B"]]
+(intern *ns* (symbol x) 666))
+X
+x
+(doseq [x terps]
+(eval `(def ~(symbol x) 666))))
+(doall (for [x terps]
+(eval `(def ~(symbol x) 666))))
+Mono

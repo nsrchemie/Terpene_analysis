@@ -5,10 +5,11 @@
 
 
 
-(defn secread [x]
+(defn secread []
 
 	(def sesq_count (atom #{}))
-	; Create an atomic list for collecting strings/compounds
+	(def mono_count (atom #{}))
+	; Create an atomic set for collecting strings/compounds
 	(with-open [rdr (io/reader "./resources/scraped")]
 		(doseq [line (line-seq rdr)]
 		; Open file and sequentially loop through each line
@@ -45,10 +46,15 @@
 						
 			(if (=(:Class tin) "Sesquiterpenes")
 			(swap! sesq_count conj (:Compound tin)))
+			(if (=(:Class tin) "Hemiterpenes")
+			(swap! mono_count conj (:Compound tin)))
 		)
 	)
-(prn (count @sesq_count))
+; (prn (str "Sesquiterpenes: " (count @sesq_count) ))
+(prn mono_count)
+; (prn (str "Monoterpenes: " (count @mono_count)))
+; (prn mono_count)
 
 )
 (defn -main []
-	(secread "x"))
+	(secread))
